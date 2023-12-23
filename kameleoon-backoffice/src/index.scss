@@ -1,8 +1,4 @@
-// вынести общие стили и подчистить
-// мб класс для шрифтов создать
-// сделать паттерн повторения для цветов индикатора
-// курсор поинтер когда вкладка активна
-
+// динамические маргны должны быть, настроить ресайз
 :root {
   --font-regular: 400;
   --font-medium: 500;
@@ -21,7 +17,7 @@
   --grey-700: #222222;
 }
 
-@mixin text_grey-light {
+@mixin text-grey-light {
   font: var(--font-regular) 14px "Roboto", sans-serif;
   color: var(--light-grey-400);
 }
@@ -37,8 +33,10 @@
 
 .dashboard {
   padding: 41px 48px;
+
   &__header {
     margin-bottom: 40px;
+
     h1 {
       font: var(--font-bold) 26px "Montserrat", sans-serif;
       color: var(--grey-700);
@@ -48,24 +46,28 @@
       cursor: default;
     }
   }
+
   &__container {
     .navigation {
       &__search {
         margin-bottom: 30px;
+
         .searchbar {
           &__field {
             position: relative;
             display: flex;
             align-items: center;
-            font: var(--font-regular) "Roboto",sans-serif;
+            font: var(--font-regular) "Roboto", sans-serif;
             height: 45px;
             border-radius: 15px;
             border: 1px solid #EBEBEB;
             background-color: var(--white);
             padding: 0 15px;
+
             svg {
               margin-right: 16px;
             }
+
             &-text {
               position: relative;
               width: 100%;
@@ -79,25 +81,30 @@
               border: 0;
               cursor: text;
             }
+
             &-info {
-              @include text_grey-light();
+              @include text-grey-light();
               text-align: right;
               background: none;
               border: none;
               width: unset;
               min-width: fit-content;
             }
+
             ::placeholder {
-              @include text_grey-light();
+              @include text-grey-light();
             }
+
             &:hover {
               border-color: var(--grey-400);
             }
           }
         }
       }
+
       &__info {
         padding-left: 15px;
+
         .textfield {
           position: relative;
           display: flex;
@@ -106,6 +113,7 @@
           background-color: transparent;
           max-width: 1500px;
           margin-bottom: 10px;
+
           &__item {
             font: var(--font-medium) 11px "Roboto", sans-serif;
             color: var(--light-grey-500);
@@ -115,6 +123,7 @@
         }
       }
     }
+
     .table {
       &__wrapper {
         .table__item {
@@ -127,6 +136,7 @@
           border-radius: 3px;
           background-color: var(--white);
           margin-bottom: 5px;
+
           &__info {
             &[about="indicator"] {
               position: absolute;
@@ -135,30 +145,31 @@
               border-radius: 3px 0px 0px 3px;
               background-color: var(--pink);
             }
+
             &[about="name"] {
               color: var(--grey-500);
               font-size: 13px;
               font-weight: var(--font-medium);
               margin-left: 15px;
             }
-            &[about="type"] {
-              color: var(--grey-400);
-              font-size: 12px;
-              font-weight: var(--font-regular);
-            }
-            &[about="status"] {
-              color: var(--grey-400); // цвет по умолчанию, для драфта
-              font-size: 12px;
-              font-weight: var(--font-medium);
-            }
+
+            &[about="type"],
             &[about="site"] {
               color: var(--grey-400);
               font-size: 12px;
               font-weight: var(--font-regular);
             }
+
+            &[about="status"] {
+              color: var(--grey-400); // цвет по умолчанию, для драфта
+              font-size: 12px;
+              font-weight: var(--font-medium);
+            }
+
             &[about="button"] {
               margin-left: auto;
               margin-right: 15px;
+
               button {
                 width: 95px;
                 height: 30px;
@@ -166,6 +177,7 @@
                 border-radius: 10px;
                 background-color: var(--green);
                 cursor: pointer;
+
                 span {
                   font: 600 12px "Montserrat", sans-serif;
                   color: var(--white);
@@ -174,6 +186,7 @@
               }
             }
           }
+
           &:hover {
             cursor: pointer;
             box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
@@ -182,15 +195,19 @@
       }
     }
   }
+
   [about="name"] {
     width: 389px;
   }
+
   [about="type"] {
     width: 100px;
   }
+
   [about="status"] {
     width: 62px;
   }
+
   [about="site"] {
     width: 117px;
   }
