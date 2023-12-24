@@ -8,6 +8,7 @@
   --green: #2EE5AC;
   --orange: #FF8346;
   --red: #FE4848;
+  --grey: #7D7D7D;
   --violet: #8686FF;
   --light-violet: #C2C2FF;
   --light-grey-400: #D1D1D1;
@@ -118,7 +119,7 @@
             font: var(--font-medium) 11px "Roboto", sans-serif;
             color: var(--light-grey-500);
             text-transform: uppercase;
-            cursor: default;
+            cursor: pointer;
           }
         }
       }
@@ -143,7 +144,15 @@
               width: 4px;
               height: 100%;
               border-radius: 3px 0px 0px 3px;
-              background-color: var(--pink);
+              &.violet {
+                background-color: var(--violet);
+              }
+              &.pink {
+                background-color: var(--pink);
+              }
+              &.light-violet {
+                background-color: var(--light-violet);
+              }
             }
 
             &[about="name"] {
@@ -161,9 +170,20 @@
             }
 
             &[about="status"] {
-              color: var(--grey-400); // цвет по умолчанию, для драфта
               font-size: 12px;
               font-weight: var(--font-medium);
+              &.grey {
+                color: var(--grey-400);
+              }
+              &.orange {
+                color: var(--orange);
+              }
+              &.red {
+                color: var(--red);
+              }
+              &.green {
+                color: var(--green);
+              }
             }
 
             &[about="button"] {
@@ -175,13 +195,27 @@
                 height: 30px;
                 border: none;
                 border-radius: 10px;
-                background-color: var(--green);
                 cursor: pointer;
 
                 span {
                   font: 600 12px "Montserrat", sans-serif;
-                  color: var(--white);
                   text-align: center;
+                }
+              }
+              &.active {
+                button {
+                  background-color: var(--grey);
+                }
+                span {
+                  color: var(--white);
+                }
+              }
+              &.disabled {
+                button {
+                  background-color: var(--green);
+                }
+                span {
+                  color: var(--white);
                 }
               }
             }
@@ -196,6 +230,7 @@
     }
   }
 
+  // вот это мб динамически высчитывать в зависимости от ширины
   [about="name"] {
     width: 389px;
   }

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Navigation, Table } from './components/Markup';
+import { Table } from './components/Markup';
 
 function App() {
   return (
@@ -8,7 +7,6 @@ function App() {
         <h1>Dashboard</h1>
       </div>
       <div className="dashboard__container">
-        <Navigation />
         <Table />
       </div>
     </div>
