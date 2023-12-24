@@ -1,40 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-//мб всю эту разметку разделить 
-// мб как-то кнопки/статус/индикатор/сайт перенести в properties?
-
-// настроить фильтрацию
-
-
-// кнопку сразу сделай отдельным компонентом и переиспользуй, сразу запланируй для кнопки два состояния, зеленая активна и серая disabled
-// 2.  лучше использовать TS, для типизации передаваемых пропсов
-// type Props = {
-//   content: string;
-//   className: string;
-// };
-// function InfoButton({ content, className }: Props): JSX.Element {return (<div className={className}>{content}</div>)}
-
-
-// 5. сортировку сделать довольно просто. Элементы лежат в хуке useState, при клике просто сортируешь как обчный массив. 
-// Далее элементы передаются на отрисовку типа <ul>{elements.map((element) => {return <li>{element}</li>})}</ul>
+// настроить сортировку 
 
 // Пользователь должен иметь возможность сортировать ( ASC, DESC), нажимая на заголовки столбцов:
 // name, type and site should be sorted in alphabetical order
 // status should be sorted in:
 // ASC: Online, Paused, Stopped, Draft - по возрастанию
 // DESC: Draft, Stopped, Paused, Online - по убыванию
-
-// Дополнительные задачи
-// Используя react-router-domбиблиотеку, реализуйте маршрутизацию между тремя страницами: dashboard, resultsи finalize. И не забудьте загрузить необходимые данные для каждой страницы.
-// Когда пользователь нажимает кнопку Resultsили Finalizeна странице панели управления, необходимо выполнить перенаправление на URL-адреса /results/[testId]и, /finalize/[testId]соответственно, без перезагрузки окна браузера.
-
-// Будет плюсом, если вы:
-// будет использовать TypeScript для выполнения задачи
-// писать тесты
-// может ли пользователь взаимодействовать с интерфейсом с помощью клавиатуры.
-// 3. попробуй продумать навигацию табом по элементам. Псевдокласс :focus-within тебе в помощь. Хорошо сочетается с buttons и input. 
-
 
 const fetchData = async (url) => {
   try {
@@ -83,11 +56,13 @@ NoResultsPage.propTypes = {
 
 const NavigationItem = ({ label, handleArrowClick }) => (
   <div className="textfield__item" about={label.toLowerCase()}>
-    <p>{label}</p>
-    <div className="textfield__arrow">
-      <button className="textfield__arrow_up" tabIndex="0" onClick={() => handleArrowClick('up', label)}></button>
-      <button className="textfield__arrow_down" tabIndex="0" onClick={() => handleArrowClick('down', label)}></button>
-    </div>
+    <div className="textfield__item_container">
+      <p>{label}</p>
+      <div className="textfield__arrow">
+        <button className="textfield__arrow_up" tabIndex="0" onClick={() => handleArrowClick('up', label)}></button>
+        <button className="textfield__arrow_down" tabIndex="0" onClick={() => handleArrowClick('down', label)}></button>
+      </div>
+      </div>
   </div>
 );
 
