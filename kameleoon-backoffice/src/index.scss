@@ -1,7 +1,9 @@
 // динамические маргны должны быть, настроить ресайз
+// стили для зелёной кнопки вынести 
 :root {
   --font-regular: 400;
   --font-medium: 500;
+  --font-medium-bold: 600;
   --font-bold: 700;
   --white: #FFF;
   --pink: #E14165;
@@ -15,7 +17,7 @@
   --light-grey-500: #999;
   --grey-400: #5C5C5C;
   --grey-500: #474747;
-  --grey-700: #222222;
+  --dark-grey: #222222;
 }
 
 @mixin text-grey-light {
@@ -40,7 +42,7 @@
 
     h1 {
       font: var(--font-bold) 26px "Montserrat", sans-serif;
-      color: var(--grey-700);
+      color: var(--dark-grey);
       line-height: 32px;
       letter-spacing: 0em;
       text-align: left;
@@ -225,6 +227,30 @@
             cursor: pointer;
             box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
           }
+        }
+      }
+      .no-results {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 130px;
+        font: var(--font-medium) 18px "Montserrat", sans-serif;
+        p {
+          color: var(--dark-grey);
+          margin-bottom: 37px;
+        }
+        button {
+          width: 95px;
+          height: 30px;
+          border-radius: 10px;
+          border: 1px solid #2EE5AC;
+          background: #2EE5AC;
+          font-size: 12px;
+          font-weight: var(--font-medium-bold);
+          color: var(--white);
+          background-color: #2EE5AC;
+          cursor: pointer;
         }
       }
     }
