@@ -23,8 +23,6 @@ const getData = async () => {
       fetchData('http://localhost:3100/sites'),
       fetchData('http://localhost:3100/tests'),
     ]);
-
-    // Check if both arrays are non-empty and their types are defined
     if (Array.isArray(sitesData) && sitesData.length > 0 &&
         Array.isArray(testsData) && testsData.length > 0) {
       return [sitesData, testsData];
@@ -142,6 +140,10 @@ const TemplateDashboard  = ({ testsData, sitesData, searchQuery, onResetSearch }
     }
   };
   // END: логика для поиска
+
+  if (testsData.length === 0 || sitesData.length === 0) {
+    return null;
+  }
 
   return (
     <div className="table">
