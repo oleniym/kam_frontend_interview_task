@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-// настроить сортировку 
-
-// Пользователь должен иметь возможность сортировать ( ASC, DESC), нажимая на заголовки столбцов:
-// name, type and site should be sorted in alphabetical order
-// status should be sorted in:
-// ASC: Online, Paused, Stopped, Draft - по возрастанию
-// DESC: Draft, Stopped, Paused, Online - по убыванию
-
 const fetchData = async (url) => {
   try {
     const response = await fetch(url);
@@ -231,22 +223,31 @@ export const Dashboard = () => {
 
   // START: логика для сортировки
   const handleArrowClick = (direction, item) => {
-    const sortedTests = [...testsData]; // Создаем копию массива, чтобы не изменять оригинальный массив
-
+    const sortedTests = [...testsData];
+  
     sortedTests.sort((a, b) => {
-      // Выбираем поле для сравнения
       const fieldA = getFieldData(a, item);
       const fieldB = getFieldData(b, item);
-
-      // Сравниваем значения полей
+  
       if (direction === 'up') {
-        return fieldA.localeCompare(fieldB);
+        return compareFields(fieldA, fieldB);
       } else {
-        return fieldB.localeCompare(fieldA);
+        return compareFields(fieldB, fieldA);
       }
     });
-
+  
     setTestsData(sortedTests);
+  };
+
+  const compareFields = (a, b) => {
+    if (typeof a === 'string' && typeof b === 'string') {
+      return a.localeCompare(b);
+    } else if (typeof a === 'number' && typeof b === 'number') {
+      return a - b;
+    }
+    // Добавьте другие типы данных, если необходимо
+  
+    return 0; // По умолчанию, если типы не совпадают
   };
 
   const getFieldData = (test, item) => {
@@ -255,12 +256,25 @@ export const Dashboard = () => {
         return test.name.toLowerCase();
       case 'Type':
         return test.type.toLowerCase();
+      case 'Status':
+        return getStatusOrder(test.status);
       case 'Site':
         const site = sitesData.find((site) => site.id === test.siteId);
         return site ? site.url.toLowerCase() : '';
       default:
         return '';
     }
+  };
+
+  const getStatusOrder = (status) => {
+    const order = {
+      ONLINE: 1,
+      PAUSED: 2,
+      STOPPED: 3,
+      DRAFT: 4,
+    };
+
+    return order[status] || 0;
   };
   // END: логика для сортировки
 
@@ -273,3 +287,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+// САЙТЫ НЕПРАВИЛЬНО СОРТИРУЮТСЯ
