@@ -16,7 +16,6 @@ const fetchData = async (url) => {
       throw new Error(`Ошибка HTTP: ${response.status}`);
     }
     const data = await response.json();
-    console.log('data FETCH', data);
     return data;
   } catch (error) {
     console.error('Ошибка при запросе к серверу:', error);
@@ -49,7 +48,6 @@ const NoResultsPage = ({ handleResetSearch }) => (
     <button onClick={handleResetSearch}>Reset</button>
   </div>
 );
-
 NoResultsPage.propTypes = {
   handleResetSearch: PropTypes.func.isRequired,
 };
@@ -65,7 +63,6 @@ const NavigationItem = ({ label, handleArrowClick }) => (
       </div>
   </div>
 );
-
 NavigationItem.propTypes = {
   label: PropTypes.string.isRequired,
   handleArrowClick: PropTypes.func.isRequired,
@@ -105,7 +102,6 @@ const Navigation = ({ onSearch, numTests, showNavigationInfo, handleArrowClick }
     )}
   </div>
 );
-
 Navigation.propTypes = {
   onSearch: PropTypes.func.isRequired,
   numTests: PropTypes.number.isRequired,
@@ -122,7 +118,6 @@ const DashboardItem = ({ test, site }) => {
     };
     return classData[siteId] || classData.default;
   };
-
   const setStatusClass = (status) => {
     const classData = {
       DRAFT: 'grey',
@@ -146,7 +141,6 @@ const DashboardItem = ({ test, site }) => {
     </div>
   );
 };
-
 DashboardItem.propTypes = {
   test: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -171,12 +165,11 @@ const TemplateDashboard  = ({ testsData, sitesData, searchQuery, onResetSearch }
     test.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const noResults = filteredTests.length === 0;
+
   const handleResetSearch = () => {
     onResetSearch();
     const searchInput = document.querySelector('.searchbar__field-text');
-    if (searchInput) {
-      searchInput.value = '';
-    }
+    if (searchInput) searchInput.value = '';
   };
   // END: логика для поиска
 
@@ -197,7 +190,6 @@ const TemplateDashboard  = ({ testsData, sitesData, searchQuery, onResetSearch }
     </div>
   );
 };
-
 TemplateDashboard.propTypes = {
   testsData: PropTypes.array.isRequired,
   sitesData: PropTypes.array.isRequired,
@@ -219,6 +211,9 @@ export const Dashboard = () => {
     });
   }, []);
 
+  console.log('testsData', testsData);
+  console.log('sitesData', sitesData);
+
   // START: логика для поиска
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -234,12 +229,40 @@ export const Dashboard = () => {
   const showNavigationInfo = numTests > 0;
   // END: логика для поиска
 
+  // START: логика для сортировки
   const handleArrowClick = (direction, item) => {
-    // Заглушка: обработчик для стрелок вверх и вниз в навигации
-    console.log(`Arrow ${direction} clicked for ${item}`);
+    const sortedTests = [...testsData]; // Создаем копию массива, чтобы не изменять оригинальный массив
+
+    sortedTests.sort((a, b) => {
+      // Выбираем поле для сравнения
+      const fieldA = getFieldData(a, item);
+      const fieldB = getFieldData(b, item);
+
+      // Сравниваем значения полей
+      if (direction === 'up') {
+        return fieldA.localeCompare(fieldB);
+      } else {
+        return fieldB.localeCompare(fieldA);
+      }
+    });
+
+    setTestsData(sortedTests);
   };
 
-  
+  const getFieldData = (test, item) => {
+    switch (item) {
+      case 'Name':
+        return test.name.toLowerCase();
+      case 'Type':
+        return test.type.toLowerCase();
+      case 'Site':
+        const site = sitesData.find((site) => site.id === test.siteId);
+        return site ? site.url.toLowerCase() : '';
+      default:
+        return '';
+    }
+  };
+  // END: логика для сортировки
 
   return (
     <div className="table">
