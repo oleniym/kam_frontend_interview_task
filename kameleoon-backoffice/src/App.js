@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App; // и экспортируем эту фукнцию в index.js
+export default App;

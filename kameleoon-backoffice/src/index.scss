@@ -118,11 +118,54 @@
           margin-bottom: 10px;
 
           &__item {
-            font: var(--font-medium) 11px "Roboto", sans-serif;
-            color: var(--light-grey-500);
-            text-transform: uppercase;
+            position: relative;
+            display: flex;
+            flex-direction: row;
             cursor: pointer;
+            p {
+              font: var(--font-medium) 11px "Roboto", sans-serif;
+              color: var(--light-grey-500);
+              text-transform: uppercase;
+            }
+            .textfield__arrow {
+              display: flex;
+              flex-direction: column;
+              margin-left: 8px;
+              position: absolute;
+              right: 0;
+              top: -1px;
+              opacity: 1;
+              button {
+                cursor: pointer;
+                position: relative;
+                background-color: unset;
+              }
+              &_up, 
+              &_down {
+                width: 7px;
+                height: 7px;
+                border: 1px solid var(--light-grey-500);
+                border-left: 0;
+                border-top: 0;
+                &:hover {
+                  border-color: var(--dark-grey);
+                }
+              }
+              &_up {
+                transform: rotate(225deg);
+              }
+              &_down {
+                transform: rotate(45deg);
+              }
+
+            }
+            &:hover {
+              .textfield__arrow {
+                opacity: 1;
+              }
+            }
           }
+
         }
       }
     }
