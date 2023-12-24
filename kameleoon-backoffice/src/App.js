@@ -1,4 +1,4 @@
-import { Table } from './components/Markup';
+import { Dashboard } from './components/Markup';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
         <h1>Dashboard</h1>
       </div>
       <div className="dashboard__container">
-        <Table />
+        <Dashboard />
       </div>
     </div>
   );

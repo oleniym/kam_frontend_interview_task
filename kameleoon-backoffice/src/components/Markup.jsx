@@ -38,41 +38,7 @@ const getData = async () => {
   }
 };
 
-const TestTableItem = ({ test, site }) => {
-  const getSiteClass = (siteId) => {
-    const classMap = {
-      1: 'pink',
-      2: 'light-violet',
-      default: 'violet',
-    };
-    return classMap[siteId] || classMap.default;
-  };
-
-  const getStatusClass = (status) => {
-    const classMap = {
-      DRAFT: 'grey',
-      ONLINE: 'green',
-      PAUSED: 'orange',
-      default: 'red',
-    };
-    return classMap[status] || classMap.default;
-  };
-
-  return (
-    <div key={test.id} className="table__item" tabIndex={test.id}>
-      <div className={`table__item__info ${getSiteClass(site.id)}`} about="indicator"></div>
-      <div className="table__item__info" about="name">{test.name}</div>
-      <div className="table__item__info" about="type">{test.type}</div>
-      <div className={`table__item__info ${getStatusClass(test.status)}`} about="status">{test.status}</div>
-      <div className="table__item__info" about="site">{site ? site.url.replace(/^(https?:\/\/)?(www\.)?/, '') : "Unknown Site"}</div>
-      <div className={`table__item__info ${test.status === "DRAFT" ? 'active' : 'disabled'}`} about="button">
-        <button><span>{test.status === "DRAFT" ? 'Finalize' : 'Result'}</span></button>
-      </div>
-    </div>
-  );
-};
-
-const NoResults = ({ handleResetSearch }) => (
+const NoResultsPage = ({ handleResetSearch }) => (
   <div className="no-results">
     <p>Your search did not match any results</p>
     <button onClick={handleResetSearch}>Reset</button>
@@ -124,47 +90,74 @@ const Navigation = ({ onSearch, numTests, showNavigationInfo, handleArrowClick }
   </div>
 );
 
-const TestTable = ({ testsData, sitesData, searchQuery, onResetSearch }) => {
-  const siteLookup = {};
+const DashboardItem = ({ test, site }) => {
+  const setSiteClass = (siteId) => {
+    const classData = {
+      1: 'pink',
+      2: 'light-violet',
+      default: 'violet',
+    };
+    return classData[siteId] || classData.default;
+  };
 
+  const setStatusClass = (status) => {
+    const classData = {
+      DRAFT: 'grey',
+      ONLINE: 'green',
+      PAUSED: 'orange',
+      default: 'red',
+    };
+    return classData[status] || classData.default;
+  };
+
+  return (
+    <div key={test.id} className="table__item" tabIndex={test.id}>
+      <div className={`table__item__info ${setSiteClass(site.id)}`} about="indicator"></div>
+      <div className="table__item__info" about="name">{test.name}</div>
+      <div className="table__item__info" about="type">{test.type}</div>
+      <div className={`table__item__info ${setStatusClass(test.status)}`} about="status">{test.status}</div>
+      <div className="table__item__info" about="site">{site ? site.url.replace(/^(https?:\/\/)?(www\.)?/, '') : "Unknown Site"}</div>
+      <div className={`table__item__info ${test.status === "DRAFT" ? 'active' : 'disabled'}`} about="button">
+        <button><span>{test.status === "DRAFT" ? 'Finalize' : 'Result'}</span></button>
+      </div>
+    </div>
+  );
+};
+
+const TemplateDashboard  = ({ testsData, sitesData, searchQuery, onResetSearch }) => {
+  // START: логика для поиска
+  const siteLookup = {};
   sitesData.forEach((site) => {
     siteLookup[site.id] = site;
   });
-
   const filteredTests = testsData.filter((test) =>
     test.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   const noResults = filteredTests.length === 0;
-
   const handleResetSearch = () => {
     onResetSearch();
-
     const searchInput = document.querySelector('.searchbar__field-text');
     if (searchInput) {
       searchInput.value = '';
     }
   };
-
-  if (testsData.length === 0 || sitesData.length === 0) {
-    return null;
-  }
+  // END: логика для поиска
 
   return (
     <div className="table">
       {noResults ? (
-        <NoResults handleResetSearch={handleResetSearch} />
+        <NoResultsPage handleResetSearch={handleResetSearch} />
       ) : (
         filteredTests.map((test) => {
           const site = siteLookup[test.siteId];
-          return <TestTableItem key={test.id} test={test} site={site} />;
+          return <DashboardItem key={test.id} test={test} site={site} />;
         })
       )}
     </div>
   );
 };
 
-export const Table = () => {
+export const Dashboard = () => {
   const [testsData, setTestsData] = useState([]);
   const [sitesData, setSitesData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -178,6 +171,7 @@ export const Table = () => {
     });
   }, []);
 
+  // START: логика для поиска
   const handleSearch = (query) => {
     setSearchQuery(query);
     const filteredTests = testsData.filter((test) =>
@@ -185,24 +179,25 @@ export const Table = () => {
     );
     setNumTests(filteredTests.length);
   };
-
   const handleResetSearch = () => {
     setSearchQuery('');
     setNumTests(testsData.length);
   };
+  const showNavigationInfo = numTests > 0;
+  // END: логика для поиска
 
   const handleArrowClick = (direction, item) => {
     // Заглушка: обработчик для стрелок вверх и вниз в навигации
     console.log(`Arrow ${direction} clicked for ${item}`);
   };
 
-  const showNavigationInfo = numTests > 0;
+  
 
   return (
     <div className="table">
       <div className="table__wrapper">
         <Navigation onSearch={handleSearch} numTests={numTests} showNavigationInfo={showNavigationInfo} handleArrowClick={handleArrowClick} />
-        <TestTable testsData={testsData} sitesData={sitesData} searchQuery={searchQuery} onResetSearch={handleResetSearch} />
+        <TemplateDashboard  testsData={testsData} sitesData={sitesData} searchQuery={searchQuery} onResetSearch={handleResetSearch} />
       </div>
     </div>
   );
