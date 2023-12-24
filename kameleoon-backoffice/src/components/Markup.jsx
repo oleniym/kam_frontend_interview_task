@@ -203,9 +203,6 @@ export const Dashboard = () => {
     });
   }, []);
 
-  console.log('testsData', testsData);
-  console.log('sitesData', sitesData);
-
   // START: логика для поиска
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -253,7 +250,6 @@ export const Dashboard = () => {
         return getStatusOrder(test.status);
       case 'Site':
         const site = sitesData.find((site) => site.id === test.siteId);
-        console.log('site ', site.url.replace(/^(https?:\/\/)?(www\.)?/, '').toLowerCase() );
         return site ? site.url.replace(/^(https?:\/\/)?(www\.)?/, '').toLowerCase() : '';
       default:
         return '';
