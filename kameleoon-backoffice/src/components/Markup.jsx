@@ -23,9 +23,18 @@ const getData = async () => {
       fetchData('http://localhost:3100/sites'),
       fetchData('http://localhost:3100/tests'),
     ]);
-    return [sitesData, testsData];
+
+    // Check if both arrays are non-empty and their types are defined
+    if (Array.isArray(sitesData) && sitesData.length > 0 &&
+        Array.isArray(testsData) && testsData.length > 0) {
+      return [sitesData, testsData];
+    } else {
+      console.error('Invalid data received. Sites or tests data is empty or not an array.');
+      throw new Error('Invalid data received.');
+    }
   } catch (error) {
     console.error('Ошибка при получении данных:', error);
+    throw error;
   }
 };
 
@@ -117,6 +126,7 @@ const Navigation = ({ onSearch, numTests, showNavigationInfo, handleArrowClick }
 
 const TestTable = ({ testsData, sitesData, searchQuery, onResetSearch }) => {
   const siteLookup = {};
+
   sitesData.forEach((site) => {
     siteLookup[site.id] = site;
   });
