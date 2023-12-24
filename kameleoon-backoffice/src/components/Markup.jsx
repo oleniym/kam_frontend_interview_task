@@ -1,5 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
+//мб всю эту разметку разделить 
+// мб как-то кнопки/статус/индикатор/сайт перенести в properties?
+
+// настроить фильтрацию
+
+
+// кнопку сразу сделай отдельным компонентом и переиспользуй, сразу запланируй для кнопки два состояния, зеленая активна и серая disabled
+// 2.  лучше использовать TS, для типизации передаваемых пропсов
+// type Props = {
+//   content: string;
+//   className: string;
+// };
+// function InfoButton({ content, className }: Props): JSX.Element {return (<div className={className}>{content}</div>)}
+
+
+// 5. сортировку сделать довольно просто. Элементы лежат в хуке useState, при клике просто сортируешь как обчный массив. 
+// Далее элементы передаются на отрисовку типа <ul>{elements.map((element) => {return <li>{element}</li>})}</ul>
+
+// Пользователь должен иметь возможность сортировать ( ASC, DESC), нажимая на заголовки столбцов:
+// name, type and site should be sorted in alphabetical order
+// status should be sorted in:
+// ASC: Online, Paused, Stopped, Draft - по возрастанию
+// DESC: Draft, Stopped, Paused, Online - по убыванию
+
+// Дополнительные задачи
+// Используя react-router-domбиблиотеку, реализуйте маршрутизацию между тремя страницами: dashboard, resultsи finalize. И не забудьте загрузить необходимые данные для каждой страницы.
+// Когда пользователь нажимает кнопку Resultsили Finalizeна странице панели управления, необходимо выполнить перенаправление на URL-адреса /results/[testId]и, /finalize/[testId]соответственно, без перезагрузки окна браузера.
+
+// Будет плюсом, если вы:
+// будет использовать TypeScript для выполнения задачи
+// писать тесты
+// может ли пользователь взаимодействовать с интерфейсом с помощью клавиатуры.
+// 3. попробуй продумать навигацию табом по элементам. Псевдокласс :focus-within тебе в помощь. Хорошо сочетается с buttons и input. 
 
 
 const fetchData = async (url) => {
@@ -43,6 +77,10 @@ const NoResultsPage = ({ handleResetSearch }) => (
   </div>
 );
 
+NoResultsPage.propTypes = {
+  handleResetSearch: PropTypes.func.isRequired,
+};
+
 const NavigationItem = ({ label, handleArrowClick }) => (
   <div className="textfield__item" about={label.toLowerCase()}>
     <p>{label}</p>
@@ -52,6 +90,11 @@ const NavigationItem = ({ label, handleArrowClick }) => (
     </div>
   </div>
 );
+
+NavigationItem.propTypes = {
+  label: PropTypes.string.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+};
 
 const Navigation = ({ onSearch, numTests, showNavigationInfo, handleArrowClick }) => (
   <div className="navigation">
@@ -88,6 +131,13 @@ const Navigation = ({ onSearch, numTests, showNavigationInfo, handleArrowClick }
   </div>
 );
 
+Navigation.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+  numTests: PropTypes.number.isRequired,
+  showNavigationInfo: PropTypes.bool.isRequired,
+  handleArrowClick: PropTypes.func.isRequired,
+};
+
 const DashboardItem = ({ test, site }) => {
   const setSiteClass = (siteId) => {
     const classData = {
@@ -120,6 +170,20 @@ const DashboardItem = ({ test, site }) => {
       </div>
     </div>
   );
+};
+
+DashboardItem.propTypes = {
+  test: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    siteId: PropTypes.number.isRequired,
+  }).isRequired,
+  site: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+  }),
 };
 
 const TemplateDashboard  = ({ testsData, sitesData, searchQuery, onResetSearch }) => {
@@ -157,6 +221,13 @@ const TemplateDashboard  = ({ testsData, sitesData, searchQuery, onResetSearch }
       )}
     </div>
   );
+};
+
+TemplateDashboard.propTypes = {
+  testsData: PropTypes.array.isRequired,
+  sitesData: PropTypes.array.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  onResetSearch: PropTypes.func.isRequired,
 };
 
 export const Dashboard = () => {

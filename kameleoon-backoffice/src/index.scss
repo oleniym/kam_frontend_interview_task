@@ -287,19 +287,19 @@
           width: 95px;
           height: 30px;
           border-radius: 10px;
-          border: 1px solid #2EE5AC;
-          background: #2EE5AC;
+          border: 1px solid var(--green);
+          background: var(--green);
           font-size: 12px;
           font-weight: var(--font-medium-bold);
           color: var(--white);
-          background-color: #2EE5AC;
+          background-color: var(--green);
           cursor: pointer;
         }
       }
     }
   }
 
-  // вот это мб динамически высчитывать в зависимости от ширины
+  // динамические маргны должны быть, настроить ресайз
   [about="name"] {
     width: 389px;
   }
