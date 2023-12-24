@@ -224,32 +224,25 @@ export const Dashboard = () => {
   // START: логика для сортировки
   const handleArrowClick = (direction, item) => {
     const sortedTests = [...testsData];
-  
     sortedTests.sort((a, b) => {
       const fieldA = getFieldData(a, item);
       const fieldB = getFieldData(b, item);
-  
       if (direction === 'up') {
         return compareFields(fieldA, fieldB);
       } else {
         return compareFields(fieldB, fieldA);
       }
     });
-  
     setTestsData(sortedTests);
   };
-
   const compareFields = (a, b) => {
     if (typeof a === 'string' && typeof b === 'string') {
       return a.localeCompare(b);
     } else if (typeof a === 'number' && typeof b === 'number') {
       return a - b;
     }
-    // Добавьте другие типы данных, если необходимо
-  
-    return 0; // По умолчанию, если типы не совпадают
+    return 0;
   };
-
   const getFieldData = (test, item) => {
     switch (item) {
       case 'Name':
@@ -260,12 +253,12 @@ export const Dashboard = () => {
         return getStatusOrder(test.status);
       case 'Site':
         const site = sitesData.find((site) => site.id === test.siteId);
-        return site ? site.url.toLowerCase() : '';
+        console.log('site ', site.url.replace(/^(https?:\/\/)?(www\.)?/, '').toLowerCase() );
+        return site ? site.url.replace(/^(https?:\/\/)?(www\.)?/, '').toLowerCase() : '';
       default:
         return '';
     }
-  };
-
+  };  
   const getStatusOrder = (status) => {
     const order = {
       ONLINE: 1,
@@ -273,7 +266,6 @@ export const Dashboard = () => {
       STOPPED: 3,
       DRAFT: 4,
     };
-
     return order[status] || 0;
   };
   // END: логика для сортировки
@@ -287,5 +279,3 @@ export const Dashboard = () => {
     </div>
   );
 };
-
-// САЙТЫ НЕПРАВИЛЬНО СОРТИРУЮТСЯ
