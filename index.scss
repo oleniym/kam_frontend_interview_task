@@ -1,0 +1,114 @@
+// вынести общие стили и подчистить
+
+@mixin text_grey {
+  color: #D1D1D1;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  padding: 41px 48px;
+  &__header {
+    margin-bottom: 40px;
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      color: #222222;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+  }
+  &__container {
+    .navigation {
+      &__search {
+        margin-bottom: 30px;
+        .searchbar {
+          &__field {
+            position: relative;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            font-family: "Roboto",sans-serif;
+            height: 45px;
+            border-radius: 15px;
+            border: 1px solid #EBEBEB;
+            background: #FFF;
+            padding: 0 15px;
+            svg {
+              margin-right: 16px;
+            }
+            &-text {
+              position: relative;
+              width: 100%;
+              height: 100%;
+              margin: 0;
+              border: 0;
+              color: inherit;
+              font-size: inherit;
+              font-weight: inherit;
+              font-family: inherit;
+              border-radius: inherit;
+              background-color: transparent;
+              outline: none;
+              box-sizing: border-box;
+              border: 0;
+            }
+            &-info {
+              @include text_grey();
+              text-align: right;
+              background: none;
+              border: none;
+              width: unset;
+              min-width: fit-content;
+            }
+            ::placeholder {
+              @include text_grey();
+            }
+          }
+        }
+      }
+      &__info {
+        padding-left: 15px;
+        .textfield {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row;
+          &__item {
+            font-family: "Roboto", sans-serif;
+            color: #999;
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+    .table {
+      &__wrapper {
+        .table__cart {
+          border-radius: 3px;
+          background: #FFF;
+          font-family: "Roboto", sans-serif;
+          &__info {
+
+          }
+        }
+      }
+    }
+  }
+}
