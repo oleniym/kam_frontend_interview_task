@@ -3,7 +3,7 @@ import { NavigationItem } from './NavigationItem';
 import { FIELDS_DASHBOARD } from './constants';
 // import { serch.svg }
 
-export const Navigation = ({ onChange, numTests, showNavigationInfo, handleArrowClick }) => (
+export const Navigation = ({ onChange, numTests, hasSearchResult, handleArrowClick }) => (
     <div className="navigation">
       <div className="navigation__search">
         <div className="searchbar">
@@ -23,7 +23,7 @@ export const Navigation = ({ onChange, numTests, showNavigationInfo, handleArrow
           </div>
         </div>
       </div>
-      {showNavigationInfo && (
+      {hasSearchResult && (
         <div className="navigation__info">
           <div className="title">
             <NavigationItem label={FIELDS_DASHBOARD.name} handleArrowClick={handleArrowClick} />
@@ -39,7 +39,7 @@ export const Navigation = ({ onChange, numTests, showNavigationInfo, handleArrow
 Navigation.propTypes = {
     onChange: PropTypes.func.isRequired,
     numTests: PropTypes.number.isRequired,
-    showNavigationInfo: PropTypes.bool.isRequired,
+    hasSearchResult: PropTypes.bool.isRequired,
     handleArrowClick: PropTypes.func.isRequired,
 };
   

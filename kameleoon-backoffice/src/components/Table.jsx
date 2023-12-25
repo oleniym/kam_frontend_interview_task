@@ -3,7 +3,7 @@ import { TableItem } from './TableItem';
 import { NoResultScreen } from './NoResultScreen'
 
 export const Table  = ({ tests, sites, searchQuery, onResetSearch }) => {
-    // START: логика для поиска
+    // START: the logic for the search
     const siteLookup = {};
     sites.forEach((site) => {
       siteLookup[site.id] = site;
@@ -11,14 +11,14 @@ export const Table  = ({ tests, sites, searchQuery, onResetSearch }) => {
     const filteredTests = tests.filter((test) =>
       test.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    const noResults = filteredTests.length === 0;
+    const noSearchResult = filteredTests.length === 0;
   
     const handleResetSearch = () => {
       onResetSearch();
       const searchInput = document.querySelector('.searchbar__field-input');
       if (searchInput) searchInput.value = '';
     };
-    // END: логика для поиска
+    // END: the logic for the search
   
     if (tests.length === 0 || sites.length === 0) {
       return null;
@@ -26,7 +26,7 @@ export const Table  = ({ tests, sites, searchQuery, onResetSearch }) => {
   
     return (
       <div className="table">
-        {noResults ? (
+        {noSearchResult ? (
           <NoResultScreen handleResetSearch={handleResetSearch} />
         ) : (
           filteredTests.map((test) => {

@@ -4,6 +4,7 @@ import { Navigation } from './Navigation';
 import { Table } from './Table';
 import { FIELDS_DASHBOARD } from './constants';
 
+
 export const Dashboard = () => {
   const [tests, setTests] = useState([]);
   const [sites, setSites] = useState([]);
@@ -18,7 +19,7 @@ export const Dashboard = () => {
     });
   }, []);
 
-  // START: логика для поиска
+  // START: the logic for the search
   const handleSearch = (query) => {
     setSearchQuery(query);
     const filteredTests = tests.filter((test) =>
@@ -30,10 +31,10 @@ export const Dashboard = () => {
     setSearchQuery('');
     setNumTests(tests.length);
   };
-  const showNavigationInfo = numTests > 0; // переименовать на isF ли hasF
-  // END: логика для поиска
+  const hasSearchResult = numTests > 0;
+  // END: the logic for the search
 
-  // START: логика для сортировки
+  // START: the logic for the sort
   const handleArrowClick = (direction, item) => { 
     const sortedTests = [...tests];
 
@@ -84,7 +85,7 @@ export const Dashboard = () => {
     };
     return order[status] || 0;
   };
-  // END: логика для сортировки
+  // END: the logic for the sort
 
 
 
@@ -98,7 +99,7 @@ export const Dashboard = () => {
           <Navigation 
             onChange={handleSearch} 
             numTests={numTests} 
-            showNavigationInfo={showNavigationInfo} 
+            hasSearchResult={hasSearchResult} 
             handleArrowClick={handleArrowClick} 
           />
           <Table 
