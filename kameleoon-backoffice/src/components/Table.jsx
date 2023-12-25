@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { DashboardItem } from './DashboardItem';
-import { NoResultsPage } from './NoResultPage'
+import { TableItem } from './TableItem';
+import { NoResultScreen } from './NoResultScreen'
 
-export const DashboardTemplate  = ({ tests, sites, searchQuery, onResetSearch }) => {
+export const Table  = ({ tests, sites, searchQuery, onResetSearch }) => {
     // START: логика для поиска
     const siteLookup = {};
     sites.forEach((site) => {
@@ -15,7 +15,7 @@ export const DashboardTemplate  = ({ tests, sites, searchQuery, onResetSearch })
   
     const handleResetSearch = () => {
       onResetSearch();
-      const searchInput = document.querySelector('.searchbar__field-text');
+      const searchInput = document.querySelector('.searchbar__field-input');
       if (searchInput) searchInput.value = '';
     };
     // END: логика для поиска
@@ -27,18 +27,18 @@ export const DashboardTemplate  = ({ tests, sites, searchQuery, onResetSearch })
     return (
       <div className="table">
         {noResults ? (
-          <NoResultsPage handleResetSearch={handleResetSearch} />
+          <NoResultScreen handleResetSearch={handleResetSearch} />
         ) : (
           filteredTests.map((test) => {
             const site = siteLookup[test.siteId];
-            return <DashboardItem key={test.id} test={test} site={site} />;
+            return <TableItem key={test.id} test={test} site={site} />;
           })
         )}
       </div>
     );
 };
 
-DashboardTemplate.propTypes = {
+Table.propTypes = {
   tests: PropTypes.array.isRequired,
   sites: PropTypes.array.isRequired,
   searchQuery: PropTypes.string.isRequired,

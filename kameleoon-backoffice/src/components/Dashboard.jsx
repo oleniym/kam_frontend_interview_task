@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getData } from './helpers/getData';
 import { Navigation } from './Navigation';
-import { DashboardTemplate } from './DashboardTemplate';
+import { Table } from './Table';
 import { FIELDS_DASHBOARD } from './constants';
-
 
 export const Dashboard = () => {
   const [tests, setTests] = useState([]);
@@ -90,11 +89,26 @@ export const Dashboard = () => {
 
 
   return (
-    <div className="table">
-      <div className="table__wrapper">
-        <Navigation onChange={handleSearch} numTests={numTests} showNavigationInfo={showNavigationInfo} handleArrowClick={handleArrowClick} />
-        <DashboardTemplate  tests={tests} sites={sites} searchQuery={searchQuery} onResetSearch={handleResetSearch} />
+    <div className="dashboard">
+      <div className="dashboard__title">
+        <h1 className="dashboard__header">Dashboard</h1>
       </div>
-    </div>
+      <div className="dashboard__container">
+        <div className="wrapper">
+          <Navigation 
+            onChange={handleSearch} 
+            numTests={numTests} 
+            showNavigationInfo={showNavigationInfo} 
+            handleArrowClick={handleArrowClick} 
+          />
+          <Table 
+            tests={tests} 
+            sites={sites} 
+            searchQuery={searchQuery} 
+            onResetSearch={handleResetSearch} 
+          />
+        </div>
+      </div>
+  </div>
   );
 };

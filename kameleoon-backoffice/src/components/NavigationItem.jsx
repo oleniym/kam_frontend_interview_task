@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 // тут убарть ап и даун
 export const NavigationItem = ({ label, handleArrowClick }) => (
-    <div className="textfield__item" data-name={label.toLowerCase()}>
-      <div className="textfield__item_container">
-        <p>{label}</p>
-        <div className="textfield__arrow">
-          <button className="textfield__arrow_up" onClick={() => handleArrowClick('up', label)}></button> 
-          <button className="textfield__arrow_down" onClick={() => handleArrowClick('down', label)}></button>
+    <div className="title__item" data-name={label.toLowerCase()}>
+      <div className="title__item_container">
+        <p className="title__name">{label}</p>
+        <div className="title__arrows">
+          <button className="title__arrow title__arrow_up" onClick={() => handleArrowClick('up', label)}></button> 
+          <button className="title__arrow title__arrow_down" onClick={() => handleArrowClick('down', label)}></button>
         </div>
         </div>
     </div>

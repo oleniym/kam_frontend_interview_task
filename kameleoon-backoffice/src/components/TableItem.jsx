@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { setSiteClass, setStatusClass } from './constants';
 
-export const DashboardItem = ({ test, site }) => {
+export const TableItem = ({ test, site }) => {
     return (
       <div key={test.id} className="table__item" tabIndex={test.id}>
         <div className={`table__item__info ${setSiteClass(site.id)}`} data-name="indicator"></div>
@@ -16,7 +16,7 @@ export const DashboardItem = ({ test, site }) => {
     );
 };
 
-DashboardItem.propTypes = {
+TableItem.propTypes = {
     test: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
