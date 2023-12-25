@@ -1,0 +1,330 @@
+// тут ниче не должно лежать
+// положить их рядом с компонентом
+// только их стили
+// отдельно дашборд, отдельно контейнер - уменьшить вложенность 
+// контейнер внутри контейнера
+// чем проще и свободнее - это лучше
+// р и баттон не писать
+// использовать бэм попроще
+
+:root {
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-medium-bold: 600;
+    --font-bold: 700;
+    --white: #FFF;
+    --pink: #E14165;
+    --green: #2EE5AC;
+    --orange: #FF8346;
+    --red: #FE4848;
+    --grey: #7D7D7D;
+    --violet: #8686FF;
+    --light-violet: #C2C2FF;
+    --light-grey-400: #D1D1D1;
+    --light-grey-500: #999;
+    --grey-400: #5C5C5C;
+    --grey-500: #474747;
+    --dark-grey: #222222;
+  }
+  
+  @mixin text-grey-light {
+    font: var(--font-regular) 14px "Roboto", sans-serif;
+    color: var(--light-grey-400);
+  }
+  
+  * {
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    line-height: normal;
+  }
+  
+  .dashboard {
+    padding: 41px 48px;
+  
+    &__header {
+      margin-bottom: 40px;
+  
+      h1 {
+        font: var(--font-bold) 26px "Montserrat", sans-serif;
+        color: var(--dark-grey);
+        line-height: 32px;
+        letter-spacing: 0em;
+        text-align: left;
+        cursor: default;
+      }
+    }
+  
+    &__container {
+      .navigation {
+        &__search {
+          margin-bottom: 30px;
+  
+          .searchbar {
+            &__field {
+              position: relative;
+              display: flex;
+              align-items: center;
+              font: var(--font-regular) "Roboto", sans-serif;
+              height: 45px;
+              border-radius: 15px;
+              border: 1px solid #EBEBEB;
+              background-color: var(--white);
+              padding: 0 15px;
+  
+              svg {
+                margin-right: 16px;
+              }
+  
+              &-text {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                border: 0;
+                border-radius: inherit;
+                background-color: transparent;
+                outline: none;
+                box-sizing: border-box;
+                border: 0;
+                cursor: text;
+              }
+  
+              &-info {
+                @include text-grey-light();
+                text-align: right;
+                background: none;
+                border: none;
+                width: unset;
+                min-width: fit-content;
+              }
+  
+              ::placeholder {
+                @include text-grey-light();
+              }
+  
+              &:hover {
+                border-color: var(--grey-400);
+              }
+            }
+          }
+        }
+  
+        &__info {
+          padding-left: 15px;
+          .textfield {
+            position: relative;
+            display: flex;
+            width: 100%;
+            border-radius: 5px 3px 3px 5px;
+            background-color: transparent;
+            max-width: 1500px;
+            margin-bottom: 10px;
+            &__item {
+              display: flex;
+              flex-direction: row;
+              margin-right: 25px;
+              &[data-name="status"] {
+                margin-right: 54px;
+              }
+              &_container {
+                position: relative;
+                cursor: pointer;
+                padding-right: 16px;
+                p {
+                  font: var(--font-medium) 11px "Roboto", sans-serif;
+                  color: var(--light-grey-500);
+                  text-transform: uppercase;
+                }
+                .textfield__arrow {
+                  display: flex;
+                  flex-direction: column;
+                  margin-left: 8px;
+                  position: absolute;
+                  right: 0;
+                  top: -1px;
+                  opacity: 0;
+                  button {
+                    cursor: pointer;
+                    position: relative;
+                    background-color: unset;
+                  }
+                  &_up, 
+                  &_down {
+                    width: 7px;
+                    height: 7px;
+                    border: 1px solid var(--light-grey-500);
+                    border-left: 0;
+                    border-top: 0;
+                    &:hover {
+                      border-color: var(--dark-grey);
+                    }
+                  }
+                  &_up {
+                    transform: rotate(225deg);
+                  }
+                  &_down {
+                    transform: rotate(45deg);
+                  }
+    
+                }
+                &:hover {
+                  .textfield__arrow {
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+  
+      .table {
+        &__wrapper {
+          .table__item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 70px;
+            font-family: "Roboto", sans-serif;
+            border-radius: 3px;
+            background-color: var(--white);
+            margin-bottom: 5px;
+  
+            &__info {
+              margin-right: 25px;
+              &[data-name="indicator"] {
+                position: absolute;
+                width: 4px;
+                height: 100%;
+                border-radius: 3px 0px 0px 3px;
+                &.violet {
+                  background-color: var(--violet);
+                }
+                &.pink {
+                  background-color: var(--pink);
+                }
+                &.light-violet {
+                  background-color: var(--light-violet);
+                }
+              }
+  
+              &[data-name="name"] {
+                color: var(--grey-500);
+                font-size: 13px;
+                font-weight: var(--font-medium);
+                margin-left: 15px;
+              }
+  
+              &[data-name="type"],
+              &[data-name="site"] {
+                color: var(--grey-400);
+                font-size: 12px;
+                font-weight: var(--font-regular);
+              }
+  
+              &[data-name="status"] {
+                font-size: 12px;
+                font-weight: var(--font-medium);
+                margin-right: 54px;
+                &.grey {
+                  color: var(--grey-400);
+                }
+                &.orange {
+                  color: var(--orange);
+                }
+                &.red {
+                  color: var(--red);
+                }
+                &.green {
+                  color: var(--green);
+                }
+              }
+  
+              &[data-name="button"] {
+                margin-left: auto;
+                margin-right: 15px;
+  
+                button {
+                  width: 95px;
+                  height: 30px;
+                  border: none;
+                  border-radius: 10px;
+                  cursor: pointer;
+  
+                  span {
+                    font: 600 12px "Montserrat", sans-serif;
+                    text-align: center;
+                  }
+                }
+                &.active {
+                  button {
+                    background-color: var(--grey);
+                  }
+                  span {
+                    color: var(--white);
+                  }
+                }
+                &.disabled {
+                  button {
+                    background-color: var(--green);
+                  }
+                  span {
+                    color: var(--white);
+                  }
+                }
+              }
+            }
+  
+            &:hover {
+              cursor: pointer;
+              box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+        .no-results {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          margin-top: 130px;
+          font: var(--font-medium) 18px "Montserrat", sans-serif;
+          p {
+            color: var(--dark-grey);
+            margin-bottom: 37px;
+          }
+          button {
+            width: 95px;
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--green);
+            background: var(--green);
+            font-size: 12px;
+            font-weight: var(--font-medium-bold);
+            color: var(--white);
+            background-color: var(--green);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    [data-name="name"] {
+      width: 389px;
+    }
+  
+    [data-name="type"] {
+      width: 100px;
+    }
+  
+    [data-name="status"] {
+      width: 62px;
+    }
+  
+    [data-name="site"] {
+      width: 117px;
+    }
+  }
+  
