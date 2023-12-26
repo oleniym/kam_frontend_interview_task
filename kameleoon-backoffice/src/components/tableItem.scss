@@ -63,22 +63,22 @@
       }
     }
   }
+}
 
-  &.active {
-    .cta button {
-      background-color: var(--grey);
-    }
-    .cta span {
-      color: var(--white);
-    }
+.active.cta {
+  button {
+    background-color: var(--green);
   }
+  span {
+    color: var(--white);
+  }
+}
 
-  &.disabled {
-    .cta button {
-      background-color: var(--green);
-    }
-    .cta span {
-      color: var(--white);
-    }
+.disabled.cta {
+  button {
+    background-color: var(--grey);
+  }
+  span {
+    color: var(--white);
   }
 }
