@@ -1,14 +1,15 @@
 import { useRef, useState } from "react";
 import PropTypes from 'prop-types';
 import { NavigationItem } from './NavigationItem';
-import { FIELDS_DASHBOARD } from './../helpers/constants';
-import { searchIcon } from '../icons/search';
-import { NoResultScreen } from "./NoResultScreen";
+import { FIELDS_DASHBOARD } from '../helpers/constants';
+import { searchIcon } from '../icons/searchIcon';
+import { NoResultScreen } from './NoResultScreen';
 
 export const Navigation = ({ tests, onChange, numTests, hasSearchResult, handleSortDashboardItems, onResetSearch }) => {
   const hasTests = tests.length > 0;
   const [value, setValue] = useState("");
   const inputRef = useRef();
+  const inputResultText = 'tests';
 
   const handleResetSearch = () => {
     onResetSearch();
@@ -39,7 +40,7 @@ export const Navigation = ({ tests, onChange, numTests, hasSearchResult, handleS
               value={value}
             />
             <div className="searchbar__field-info">
-              {numTests} tests
+              {numTests} {inputResultText}
             </div>
           </div>
         </div>

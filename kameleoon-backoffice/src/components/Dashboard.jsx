@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getData } from './helpers/getData';
 import { sortAsc, sortDesc } from './helpers/sortTests';
-import { Navigation } from './navigation/Navigation';
-import { Table } from './table/Table';
+import { Navigation } from './Navigation/Navigation';
+import { Table } from './Table/Table';
 
 export const Dashboard = () => {
   const [tests, setTests] = useState([]);
@@ -40,8 +40,6 @@ export const Dashboard = () => {
     setNumTests(tests.length);
   };
 
-  const hasSearchResult = numTests > 0;
-
   const handleSortDashboardItems = (label, currentDirection) => {
     const sortedTests = currentDirection === 'asc' ? sortAsc(tests, label, sites) : sortDesc(tests, label, sites);
     setTests(sortedTests);
@@ -58,7 +56,7 @@ export const Dashboard = () => {
             tests={tests} 
             onChange={handleSearch} 
             numTests={numTests} 
-            hasSearchResult={hasSearchResult} 
+            hasSearchResult={numTests > 0} 
             handleSortDashboardItems={handleSortDashboardItems} 
             onResetSearch={handleResetSearch} 
           />

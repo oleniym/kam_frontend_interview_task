@@ -1,16 +1,16 @@
 .dashboard {
   padding: 41px 48px;
-}
+  
+  &__title {
+    margin-bottom: 40px;
+  }
 
-.dashboard__title {
-  margin-bottom: 40px;
-}
-
-.dashboard__header {
-  font: var(--font-bold) 26px "Montserrat", sans-serif;
-  color: var(--dark-grey);
-  line-height: 32px;
-  letter-spacing: 0em;
-  text-align: left;
-  cursor: default;
+  &__header {
+    font: var(--font-bold) 26px "Montserrat", sans-serif;
+    color: var(--dark-grey);
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+    cursor: default;
+  }
 }

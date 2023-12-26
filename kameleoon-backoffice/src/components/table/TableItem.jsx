@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { setSiteClass, setStatusClass } from './../helpers/constants';
+import { setSiteClass, setStatusClass } from '../helpers/constants';
 
 export const TableItem = ({ test, site }) => {
   return (
