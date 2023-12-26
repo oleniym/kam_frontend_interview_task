@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { TableItem } from './TableItem';
 import { NoResultScreen } from './NoResultScreen';
 
 export const Table = ({ tests, sites, searchQuery, onResetSearch }) => {
-  
-  // START: the logic for the search
+
+  // const elementRef
+
   const siteLookup = sites.reduce((acc, site) => {
     acc[site.id] = site;
     return acc;
@@ -17,12 +18,11 @@ export const Table = ({ tests, sites, searchQuery, onResetSearch }) => {
 
   const handleResetSearch = () => {
     onResetSearch();
-    const searchInput = document.querySelector('.searchbar__field-input');
+    const searchInput = document.querySelector('.searchbar__field-input'); // переписать, избавиться от него
     if (searchInput) searchInput.value = '';
   };
 
   const noSearchResult = filteredTests.length === 0;
-  // END: the logic for the search
 
   if (tests.length === 0 || sites.length === 0) {
     return null;

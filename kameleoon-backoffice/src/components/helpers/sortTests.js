@@ -1,4 +1,4 @@
-import { FIELDS_DASHBOARD } from './../constants';
+import { FIELDS_DASHBOARD } from './constants';
 
 const compareFields = (a, b) => {
   if (typeof a === 'string' && typeof b === 'string') {

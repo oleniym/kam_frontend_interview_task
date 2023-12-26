@@ -1,6 +1,6 @@
-@import './common.scss';
+@import './helpers/common.scss';
 @import './dashboard.scss';
-@import './navigation.scss';
-@import './navigationItem.scss';
-@import './noResultScreen.scss';
-@import './tableItem.scss';
+@import './navigation/navigation.scss';
+@import './navigation/navigationItem.scss';
+@import './table/noResultScreen.scss';
+@import './table/tableItem.scss';

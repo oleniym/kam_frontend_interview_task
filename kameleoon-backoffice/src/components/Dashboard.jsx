@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getData } from './helpers/getData';
 import { sortAsc, sortDesc } from './helpers/sortTests';
-import { Navigation } from './Navigation';
-import { Table } from './Table';
+import { Navigation } from './navigation/Navigation';
+import { Table } from './table/Table';
 
 export const Dashboard = () => {
   const [tests, setTests] = useState([]);
@@ -25,7 +25,6 @@ export const Dashboard = () => {
     fetchData();
   }, []);
 
-  // START: the logic for the search
   const handleSearch = (query) => {
     setSearchQuery(query);
 
@@ -42,14 +41,11 @@ export const Dashboard = () => {
   };
 
   const hasSearchResult = numTests > 0;
-  // END: the logic for the search
 
-  // START: the logic for the sort
-  const handleArrowClick = (label, currentDirection) => {
+  const handleSortDashboardItems = (label, currentDirection) => {
     const sortedTests = currentDirection === 'asc' ? sortAsc(tests, label, sites) : sortDesc(tests, label, sites);
     setTests(sortedTests);
   };
-  // END: the logic for the sort
 
   return (
     <div className="dashboard">
@@ -62,7 +58,7 @@ export const Dashboard = () => {
             onChange={handleSearch} 
             numTests={numTests} 
             hasSearchResult={hasSearchResult} 
-            handleArrowClick={handleArrowClick} 
+            handleSortDashboardItems={handleSortDashboardItems} 
           />
           <Table 
             tests={tests} 
