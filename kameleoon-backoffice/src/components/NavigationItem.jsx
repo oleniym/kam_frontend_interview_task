@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 
-// тут убарть ап и даун
 export const NavigationItem = ({ label, handleArrowClick }) => (
-    <div className="title__item" data-name={label.toLowerCase()}>
+    <div className={`title__item ${label.toLowerCase()}`}>
       <div className="title__item_container">
         <p className="title__name">{label}</p>
         <div className="title__arrows">
-          <button className="title__arrow title__arrow_up" onClick={() => handleArrowClick('up', label)}></button> 
-          <button className="title__arrow title__arrow_down" onClick={() => handleArrowClick('down', label)}></button>
+          <button className="title__arrow title__arrow_asc" onClick={() => handleArrowClick(label, 'asc')}></button> 
+          <button className="title__arrow title__arrow_desc" onClick={() => handleArrowClick(label, 'desc')}></button>
         </div>
         </div>
     </div>

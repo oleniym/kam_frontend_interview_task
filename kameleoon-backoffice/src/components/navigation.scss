@@ -18,10 +18,10 @@
   svg {
     margin-right: 16px;
   }
-}
 
-.searchbar__field:hover {
-  border-color: var(--grey-400);
+  &:hover {
+    border-color: var(--grey-400);
+  }
 }
 
 .searchbar__field-input {
@@ -36,10 +36,10 @@
   box-sizing: border-box;
   border: 0;
   cursor: text;
-}
 
-.searchbar__field-input::placeholder {
-  @include text-grey-light();
+  &::placeholder {
+    @include text-grey-light();
+  }
 }
 
 .searchbar__field-info {

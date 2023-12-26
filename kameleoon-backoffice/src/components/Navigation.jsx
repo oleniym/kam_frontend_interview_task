@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import { NavigationItem } from './NavigationItem';
 import { FIELDS_DASHBOARD } from './constants';
-// import { serch.svg }
+import { searchIcon } from './icons/search';
 
 export const Navigation = ({ onChange, numTests, hasSearchResult, handleArrowClick }) => (
     <div className="navigation">
       <div className="navigation__search">
         <div className="searchbar">
           <div className="searchbar__field">
-
+              {searchIcon}
             <input
               autoComplete="off"
               className="searchbar__field-input"
