@@ -1,21 +1,42 @@
+import { useRef, useState } from "react";
 import PropTypes from 'prop-types';
 import { NavigationItem } from './NavigationItem';
 import { FIELDS_DASHBOARD } from './../helpers/constants';
 import { searchIcon } from '../icons/search';
+import { NoResultScreen } from "./NoResultScreen";
 
-export const Navigation = ({ onChange, numTests, hasSearchResult, handleSortDashboardItems }) => (
+export const Navigation = ({ tests, onChange, numTests, hasSearchResult, handleSortDashboardItems, onResetSearch }) => {
+  const hasTests = tests.length > 0;
+  const [value, setValue] = useState("");
+  const inputRef = useRef();
+
+  const handleResetSearch = () => {
+    onResetSearch();
+    if (inputRef.current) {
+      setValue('');
+    }
+  }
+
+  if (!hasTests) return null;
+
+  return (
     <div className="navigation">
       <div className="navigation__search">
         <div className="searchbar">
           <div className="searchbar__field">
               {searchIcon}
             <input
+              ref={inputRef}
               autoComplete="off"
               className="searchbar__field-input"
               placeholder="What test are you looking for?"
               spellCheck="false"
               type="text"
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => {
+                setValue(e.target.value);
+                onChange(e.target.value);
+              }}
+              value={value}
             />
             <div className="searchbar__field-info">
               {numTests} tests
@@ -23,7 +44,7 @@ export const Navigation = ({ onChange, numTests, hasSearchResult, handleSortDash
           </div>
         </div>
       </div>
-      {hasSearchResult && (
+      {hasSearchResult ? (
         <div className="navigation__info">
           <div className="container">
             <NavigationItem label={FIELDS_DASHBOARD.name} handleSortDashboardItems={handleSortDashboardItems} />
@@ -32,14 +53,18 @@ export const Navigation = ({ onChange, numTests, hasSearchResult, handleSortDash
             <NavigationItem label={FIELDS_DASHBOARD.site} handleSortDashboardItems={handleSortDashboardItems} />
           </div>
         </div>
+      ) : (
+        <NoResultScreen onClick={handleResetSearch} />
       )}
     </div>
-);
+  );
+};
 
 Navigation.propTypes = {
     onChange: PropTypes.func.isRequired,
     numTests: PropTypes.number.isRequired,
     hasSearchResult: PropTypes.bool.isRequired,
     handleSortDashboardItems: PropTypes.func.isRequired,
+    onResetSearch: PropTypes.func.isRequired,
 };
   

@@ -9,8 +9,8 @@ export const TableItem = ({ test, site }) => {
       <div className="cell__info type">{test.type}</div>
       <div className={`cell__info status ${setStatusClass(test.status)}`}>{test.status}</div>
       <div className={`cell__info site`}>{site ? site.url.replace(/^(https?:\/\/)?(www\.)?/, '') : "Unknown Site"}</div>
-      <div className={`cell__info cta ${test.status === "DRAFT" ? 'disabled' : 'active'}`}> 
-        <button><span>{test.status === "DRAFT" ? 'Finalize' : 'Result'}</span></button>
+      <div className={`cell__info info ${test.status === "DRAFT" ? 'disabled' : 'active'}`}> 
+        <button className="button"><span className="span">{test.status === "DRAFT" ? 'Finalize' : 'Result'}</span></button>
       </div>
     </div>
   );

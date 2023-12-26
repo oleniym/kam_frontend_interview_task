@@ -55,16 +55,17 @@ export const Dashboard = () => {
       <div className="dashboard__container">
         <div className="wrapper">
           <Navigation 
+            tests={tests} 
             onChange={handleSearch} 
             numTests={numTests} 
             hasSearchResult={hasSearchResult} 
             handleSortDashboardItems={handleSortDashboardItems} 
+            onResetSearch={handleResetSearch} 
           />
           <Table 
             tests={tests} 
             sites={sites} 
-            searchQuery={searchQuery} 
-            onResetSearch={handleResetSearch} 
+            searchQuery={searchQuery}
           />
         </div>
       </div>

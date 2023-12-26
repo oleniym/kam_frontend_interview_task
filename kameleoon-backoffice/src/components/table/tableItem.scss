@@ -45,18 +45,18 @@
       margin-right: 54px;
     }
 
-    &.cta {
+    &.info {
       margin-left: auto;
       margin-right: 15px;
 
-      button {
+      .button {
         width: 95px;
         height: 30px;
         border: none;
         border-radius: 10px;
         cursor: pointer;
 
-        span {
+        .span {
           font: 600 12px "Montserrat", sans-serif;
           text-align: center;
         }
@@ -65,20 +65,20 @@
   }
 }
 
-.active.cta {
-  button {
+.active.info {
+  .button {
     background-color: var(--green);
   }
-  span {
+  .span {
     color: var(--white);
   }
 }
 
-.disabled.cta {
-  button {
+.disabled.info {
+  .button {
     background-color: var(--grey);
   }
-  span {
+  .span {
     color: var(--white);
   }
 }
